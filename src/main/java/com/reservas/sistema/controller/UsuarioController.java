@@ -1,29 +1,18 @@
-package com.reservas.sistema.controller;
+package com.reservas.sistema.producer;
 
-import com.reservas.sistema.model.Usuario;
-import com.reservas.sistema.service.UsuarioService;
-import jakarta.validation.Valid;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
+import org.springframework.stereotype.Component;
 
-import java.util.List;
+@Component
+public class UsuarioProducer {
 
-@RestController
-@RequestMapping("/api/usuarios")
-public class UsuarioController {
+    private final RabbitTemplate rabbitTemplate;
 
-    private final UsuarioService servicio;
-
-    public UsuarioController(UsuarioService servicio) {
-        this.servicio = servicio;
+    public UsuarioProducer(RabbitTemplate rabbitTemplate) {
+        this.rabbitTemplate = rabbitTemplate;
     }
 
-    @GetMapping
-    public List<Usuario> listar() {
-        return servicio.listar();
-    }
-
-    @PostMapping
-    public Usuario crear(@Valid @RequestBody Usuario usuario) {
-        return servicio.guardar(usuario);
+    public void enviarMensaje(String mensaje) {
+        rabbitTemplate.convertAndSend("colaReservas", mensaje);
     }
 }
