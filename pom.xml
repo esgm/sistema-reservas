@@ -55,6 +55,20 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+		<!-- Validación con Jakarta (Spring Boot 3+) -->
+		<dependency>
+			<groupId>jakarta.validation</groupId>
+			<artifactId>jakarta.validation-api</artifactId>
+			<version>3.0.2</version>
+		</dependency>
+		<!-- Lombok: para @Getter, @Setter, @NoArgsConstructor, etc. -->
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<version>1.18.30</version> <!-- última versión estable a mayo 2025 -->
+			<scope>provided</scope>
+		</dependency>
+
 	</dependencies>
 
 	<build>
